@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.FlowLayout;
@@ -37,7 +31,7 @@ import static sun.awt.image.ImagingLib.filter;
  */
 
 public class Slideshow extends JApplet  {
-   
+   //setting all JItmes along with items for the image and timer
     private JLabel display;
     private JButton open ;
    private  JButton start ;
@@ -57,7 +51,7 @@ public class Slideshow extends JApplet  {
     String fileName;
     
 
-  
+  //basically the main method for a JApplet
     public void init() {
         this.setSize(1000,1500);
         buildNavPanel();
@@ -66,20 +60,20 @@ public class Slideshow extends JApplet  {
         
         
     }
-    
+    //creates the panel that will hold the slide show
     private void buildPicturePanel(){
         
         for (int i = 0; i< pictures.length; ++i)
             pictures[counter] = new ImageIcon(fileName);
         
         label = new JLabel();
-        
+        //timmer declared in here
         Timer timer = new Timer(100, new TimerListener());
  
 
         
     }
-    
+    //needed for the timer
     class TimerListener implements ActionListener{
 
        
@@ -90,6 +84,7 @@ public class Slideshow extends JApplet  {
         }
         
     }
+    //navigation panel where user can hit add, start, stop
     private void buildNavPanel(){
         navigationPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
         navigationPanel.setLayout(new GridLayout(0,3));
@@ -105,17 +100,21 @@ public class Slideshow extends JApplet  {
         
     }
    
-    
+    //main panel holds all panels with location
     private void mainPanel(){
         buildNavPanel();
         buildPicturePanel();
         add(navigationPanel,BorderLayout.SOUTH);
         add(picturePanel, BorderLayout.CENTER);
     }
+    
+    //shows current picture
     public void showCurrent(){
         display.setIcon(new ImageIcon(images[currentImage]));
         
     }
+    
+    //shows next picture
     public void showNext(){
         currentImage = currentImage +1;
         if (currentImage >= images.length){
@@ -130,10 +129,10 @@ public class Slideshow extends JApplet  {
 
     
    
-
+//this will make the openlistener work
    private class OpenListener implements ActionListener{
        
-   
+   //actionevent for openlistener
     public void actionPerformed(ActionEvent e) {
         JFileChooser fc= new JFileChooser();
      FileFilter filter = new FileNameExtensionFilter ("JPEG file", "jpg", "jpeg");
