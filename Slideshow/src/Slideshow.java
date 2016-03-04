@@ -7,6 +7,7 @@
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,12 +33,15 @@ import static sun.awt.image.ImagingLib.filter;
  * @author Zachary Murphy
  */
 
-public class Slideshow extends JApplet implements ActionListener {
+public class Slideshow extends JApplet  {
    
-    private JLabel display = new JLabel();
-    private JButton open = new JButton("Open");
-    JButton start = new JButton ("Start");
-    JButton stop = new JButton ("Stop");
+    private JLabel display;
+    private JButton open ;
+   private  JButton start ;
+    private JButton stop ;
+    private JPanel picturePanel;
+    private JPanel navigationPanel;
+    private JPanel mainPanel;
     
     int currentImage = -1;
     String images[];
@@ -46,18 +50,35 @@ public class Slideshow extends JApplet implements ActionListener {
 
   
     public void init() {
-        JPanel buttons = new JPanel (new FlowLayout());
-        buttons.add(open);
-        buttons.add(start);
-        buttons.add(stop);
-        
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add("Center", new JScrollPane(display));
-        getContentPane().add("South", buttons);
-        showNext();
+        this.setSize(500,500);
+        buildNavPanel();
+        mainPanel();
         
         
+    }
+    
+    private void buildPicturePanel(){
+        picturePanel = new JPanel();
         
+    }
+    private void buildNavPanel(){
+        navigationPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
+        navigationPanel.setLayout(new GridLayout(0,3));
+        open = new JButton("Open Images (Up to 10)");
+        start = new JButton ("Start Slide Show");
+        stop = new JButton ("Stop Slide Show");
+        open.addActionListener(new OpenListener());
+        navigationPanel.add(open);
+        navigationPanel.add(start);
+        navigationPanel.add(stop);
+        
+        
+        
+    }
+    
+    private void mainPanel(){
+        buildNavPanel();
+        add(navigationPanel,BorderLayout.SOUTH);
     }
     public void showCurrent(){
         display.setIcon(new ImageIcon(images[currentImage]));
@@ -73,9 +94,13 @@ public class Slideshow extends JApplet implements ActionListener {
         
         
     }
+
+
     
    
 
+   private class OpenListener implements ActionListener{
+       
    
     public void actionPerformed(ActionEvent e) {
         JFileChooser fc= new JFileChooser();
@@ -89,7 +114,7 @@ public class Slideshow extends JApplet implements ActionListener {
   
     }
 
-
+    }
 
 }
 }
