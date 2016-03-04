@@ -55,35 +55,21 @@ public class Slideshow extends JApplet  {
     public void init() {
         this.setSize(1000,1500);
         buildNavPanel();
-        buildPicturePanel();
+       // buildPicturePanel();
         mainPanel();
         
         
     }
     //creates the panel that will hold the slide show
     private void buildPicturePanel(){
-        
-        for (int i = 0; i< pictures.length; ++i)
-            pictures[counter] = new ImageIcon(fileName);
-        
-        label = new JLabel();
-        //timmer declared in here
-        Timer timer = new Timer(100, new TimerListener());
- 
-
+      try{
+          pics = ImageIO.read(new File(fileName));
+      }catch(IOException ex){
+          System.out.println("Please open another selection of pictures.");
+      }
         
     }
-    //needed for the timer
-    class TimerListener implements ActionListener{
-
-       
-        public void actionPerformed(ActionEvent e) {
-            counter ++;
-            counter %= pictures.length;
-            label.setIcon(pictures[counter]);
-        }
-        
-    }
+    
     //navigation panel where user can hit add, start, stop
     private void buildNavPanel(){
         navigationPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
@@ -103,9 +89,9 @@ public class Slideshow extends JApplet  {
     //main panel holds all panels with location
     private void mainPanel(){
         buildNavPanel();
-        buildPicturePanel();
+        //buildPicturePanel();
         add(navigationPanel,BorderLayout.SOUTH);
-        add(picturePanel, BorderLayout.CENTER);
+        //add(picturePanel, BorderLayout.CENTER);
     }
     
     //shows current picture
