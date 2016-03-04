@@ -82,20 +82,14 @@ public class Slideshow extends JApplet implements ActionListener {
      FileFilter filter = new FileNameExtensionFilter ("JPEG file", "jpg", "jpeg");
     fc.setFileFilter(filter);
     fc.setMultiSelectionEnabled(true);
-     int response = fc.showOpenDialog(open);
+     int response = fc.showOpenDialog(null);
      if (response == JFileChooser.APPROVE_OPTION){
-         liblFileName.setText(fc.getSelectedFile().toString);
-         fileName = fc.getSelectedFile().toString();
-     }else{
-         liblFileName.setText("The file open operation was cancelled.");
-         fileName = "The file open operation was cancelled.";
-     
-        
-        
-        
-    }
+        File selectedFile = fc.getSelectedFile();
+        String fileName = selectedFile.getPath();
+  
     }
 
 
 
+}
 }
