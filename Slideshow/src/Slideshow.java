@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import static java.nio.channels.AsynchronousFileChannel.open;
 import java.nio.file.Files;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -22,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -75,12 +77,19 @@ public class Slideshow extends JApplet implements ActionListener {
 
    
     public void actionPerformed(ActionEvent e) {
-        JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif");
-    chooser.setFileFilter(filter);
-    int return = chooser.showOpenDialog(parent);
-    if( return == JFileChooser.APPROVE_OPTION){
-        showNext();
+     final JFileChooser fc= new JFileChooser();
+     FileFilter filter = new FileNameExtensionFilter ("JPEG file", "jpg", "jpeg");
+    fc.setFileFilter(filter);
+     int response = fc.showOpenDialog(TypeOfFile.this);
+     if (response == JFileChooser.APPROVE_OPTION){
+         liblFileName.setText(fc.getSelectedFile().toString);
+         fileName = fc.getSelectedFile().toString();
+     }else{
+         liblFileName.setText("The file open operation was cancelled.");
+         fileName = "The file open operation was cancelled.";
+     
+        
+        
         
     }
     }
