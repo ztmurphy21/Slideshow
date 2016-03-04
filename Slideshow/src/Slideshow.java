@@ -53,9 +53,9 @@ public class Slideshow extends JApplet  {
 
   //basically the main method for a JApplet
     public void init() {
-        this.setSize(1000,1500);
+        this.setSize(400,500);
         buildNavPanel();
-       // buildPicturePanel();
+       buildPicturePanel();
         mainPanel();
         
         
@@ -89,9 +89,9 @@ public class Slideshow extends JApplet  {
     //main panel holds all panels with location
     private void mainPanel(){
         buildNavPanel();
-        //buildPicturePanel();
+       buildPicturePanel();
         add(navigationPanel,BorderLayout.SOUTH);
-        //add(picturePanel, BorderLayout.CENTER);
+        add(picturePanel, BorderLayout.CENTER);
     }
     
     //shows current picture
