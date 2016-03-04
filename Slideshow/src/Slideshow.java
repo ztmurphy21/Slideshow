@@ -22,6 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -74,18 +75,13 @@ public class Slideshow extends JApplet implements ActionListener {
 
    
     public void actionPerformed(ActionEvent e) {
-        int x =0;
-        if (e.getSource() == open){
-            JFileChooser fc = new JFileChooser();
-            fc.setMultiSelectionEnabled(true);
-            fc.showOpenDialog();
-            int result = fc.showOpenDialog(new JFrame());
-            if (result == JFileChooser.APPROVE_OPTION){
-                x=x+1;
-                File[] files = fc.getSelectedFiles();
-              
-            }
-        }
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif");
+    chooser.setFileFilter(filter);
+    int return = chooser.showOpenDialog(parent);
+    if( return == JFileChooser.APPROVE_OPTION){
+        
+    }
     }
 
 
