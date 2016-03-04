@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -76,10 +77,12 @@ public class Slideshow extends JApplet implements ActionListener {
         int x =0;
         if (e.getSource() == open){
             JFileChooser fc = new JFileChooser();
-            int result = fc.showOpenDialog(null);
+            fc.setMultiSelectionEnabled(true);
+            fc.showOpenDialog();
+            int result = fc.showOpenDialog(new JFrame());
             if (result == JFileChooser.APPROVE_OPTION){
                 x=x+1;
-                File file = fc.getSelectedFile();
+                File[] files = fc.getSelectedFiles();
               
             }
         }
