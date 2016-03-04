@@ -80,6 +80,7 @@ public class Slideshow extends JApplet implements ActionListener {
     chooser.setFileFilter(filter);
     int return = chooser.showOpenDialog(parent);
     if( return == JFileChooser.APPROVE_OPTION){
+        showNext();
         
     }
     }
