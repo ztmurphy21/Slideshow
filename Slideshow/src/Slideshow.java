@@ -11,12 +11,16 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -32,6 +36,7 @@ public class Slideshow extends JApplet implements ActionListener {
     
     int currentImage = -1;
     String images[];
+    private Object image;
     
 
   
@@ -42,15 +47,25 @@ public class Slideshow extends JApplet implements ActionListener {
         buttons.add(stop);
         
         getContentPane().setLayout(new BorderLayout());
-        getContentPane().add("Center", display);
+        getContentPane().add("Center", new JScrollPane(display));
         getContentPane().add("South", buttons);
+        showNext();
+        
         
         
     }
     public void showCurrent(){
+        display.setIcon(new ImageIcon(images[currentImage]));
         
     }
     public void showNext(){
+        currentImage = currentImage +1;
+        if (currentImage >= images.length){
+            currentImage = 0;
+        }
+        showCurrent();
+    
+        
         
     }
     
@@ -64,7 +79,8 @@ public class Slideshow extends JApplet implements ActionListener {
             int result = fc.showOpenDialog(null);
             if (result == JFileChooser.APPROVE_OPTION){
                 x=x+1;
-                Files[x] images = fc.getSelectedFile();
+                File file = fc.getSelectedFile();
+              
             }
         }
     }
