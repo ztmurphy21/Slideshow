@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import static sun.awt.image.ImagingLib.filter;
 
 /**
  *
@@ -33,8 +34,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Slideshow extends JApplet implements ActionListener {
    
-    JLabel display = new JLabel();
-    JButton open = new JButton("Open");
+    private JLabel display = new JLabel();
+    private JButton open = new JButton("Open");
     JButton start = new JButton ("Start");
     JButton stop = new JButton ("Stop");
     
@@ -77,10 +78,11 @@ public class Slideshow extends JApplet implements ActionListener {
 
    
     public void actionPerformed(ActionEvent e) {
-     final JFileChooser fc= new JFileChooser();
+        JFileChooser fc= new JFileChooser();
      FileFilter filter = new FileNameExtensionFilter ("JPEG file", "jpg", "jpeg");
     fc.setFileFilter(filter);
-     int response = fc.showOpenDialog(TypeOfFile.this);
+    fc.setMultiSelectionEnabled(true);
+     int response = fc.showOpenDialog(open);
      if (response == JFileChooser.APPROVE_OPTION){
          liblFileName.setText(fc.getSelectedFile().toString);
          fileName = fc.getSelectedFile().toString();
