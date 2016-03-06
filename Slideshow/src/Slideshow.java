@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.File;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 
@@ -45,7 +46,7 @@ public Slideshow(){
     
     //locations set in border layout for each panel
     add(imagePanel, BorderLayout.CENTER);
-    add(buttonPanel, BorderLayout.SOUTH);
+    add(buttonPanel, BorderLayout.NORTH);
     
     
     //inst of fileSelector id
@@ -129,7 +130,10 @@ private void buildImagePanel(){
         
         @Override
         public void actionPerformed(ActionEvent ae) {
-               File selectedFile;
+            
+            FileNameExtensionFilter filter = new FileNameExtensionFilter ("Images", "jpg", "gif", "png");   
+            fileSelector.setFileFilter(filter);
+            File selectedFile;
                ImageIcon thisImage;
                String filename;
                int fileChooserStatus;
