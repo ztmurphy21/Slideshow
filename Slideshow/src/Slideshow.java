@@ -33,7 +33,7 @@ public Slideshow(){
     
     setLayout(new BorderLayout());
     
-  //  buildImagePanel();
+     buildImagePanel();
     buildButtonPanel();
     
     add(imagePanel, BorderLayout.CENTER);
@@ -45,6 +45,10 @@ public Slideshow(){
     images = new ImageIcon[MAX_IMAGES];
     pack();
     setVisible(true);
+    
+}
+private void buildImagePanel(){
+    imagePanel = new JPanel();
     
 }
     private void buildButtonPanel(){
